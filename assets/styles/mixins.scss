@@ -1,0 +1,154 @@
+// Media
+@mixin desktop() {
+  @media (max-width: $desktop) {
+    @content
+  }
+}
+
+@mixin laptop() {
+  @media (max-width: $laptop) {
+    @content
+  }
+}
+
+@mixin mobile() {
+  @media (max-width: $mobile) {
+    @content
+  }
+}
+
+
+//Page hero block
+@mixin page-hero__desktop {
+  .hero-content {
+    background: $grey11 url("../images/careers-page/careers-hero-bg.png") no-repeat 100% 0;
+    border-radius: 1.11rem;
+    padding: 2.78rem;
+
+    position: relative;
+
+    &__title {
+      position: absolute;
+      top: 2.78rem;
+      left: 2.78rem;
+
+      max-width: 43.9rem;
+      width: 100%;
+      padding: 4.44rem;
+      border-radius: 1.1rem 0 4.4rem 1.1rem;
+      background: $grey10;
+
+      h1 {
+        font-size: 3.2rem;
+        font-weight: 500;
+        line-height: 130%;
+        margin-bottom: 1.28rem;
+
+        span {
+          color: $green60;
+          font-size: inherit;
+        }
+      }
+
+      p {
+        color: $grey70;
+      }
+    }
+
+    &__img {
+      max-width: 53rem;
+      width: 100%;
+
+      margin-left: auto;
+      border-radius: 0.88rem;
+      background-blend-mode: overlay, normal, normal;
+    }
+  }
+}
+
+@mixin page-hero__laptop {
+  @include laptop {
+    .hero-content {
+      padding: 2.22rem;
+
+      &__title {
+        top: 2.22rem;
+        left: 2.22rem;
+
+        max-width: 36.5rem;
+        padding: 3.33rem;
+        border-radius: 1.1rem 0 3.3rem 1.1rem;
+
+        h1 {
+          font-size: 2.6rem;
+          margin-bottom: 1.11rem;
+        }
+
+        p {
+          font-size: 0.88rem;
+        }
+      }
+
+      &__img {
+        max-width: 39.7rem;
+      }
+    }
+  }
+}
+
+@mixin page-hero__mobile {
+  @include mobile {
+    .hero-content {
+      padding: .78rem;
+
+      display: flex;
+      flex-direction: column-reverse;
+
+      &__title {
+        position: relative;
+        top: -2.28rem;
+        left: 0;
+
+        text-align: center;
+
+        border-radius: 1.1rem;
+        padding: 1.33rem;
+
+        h1 {
+          font-size: 1.55rem;
+          margin-bottom: .78rem;
+        }
+
+        p {
+          font-size: 0.77rem;
+        }
+
+        br {
+          display: none;
+        }
+      }
+
+      &__img {
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+//Grid columns setup
+
+@mixin default-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.67rem;
+
+  @include laptop {
+    gap: 1.11rem;
+  }
+
+  @include mobile {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+
