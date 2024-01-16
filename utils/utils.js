@@ -12,3 +12,4 @@ export const checkUserToken = () => {
         return navigateTo('/authorization');
     }
 }
+export const checkUserAuth = () => !!localStorage.getItem('token');

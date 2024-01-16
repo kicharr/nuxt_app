@@ -3,8 +3,7 @@
 // Imports
 
 import {useGeneralStore} from "~/stores/general/index.js";
-import ReviewsSlider from "~/components/pages-blocks/reviews-slider.vue";
-import MainFooter from "~/components/general/main-footer.vue";
+import ReviewsSlider from "~/components/pages-blocks/sliders/reviews-slider.vue";
 
 // State
 
@@ -31,10 +30,7 @@ const changeLimit = (val) => {
     generalStore.getQuestionsAskedSliced(val, disableLoader);
   }, 500)
 }
-
 const changeCurrentPlanProducts = (val) => productPlan.value = val;
-const changeCurrentPlanReviews = (val) => productPlan.value = val;
-
 function disableLoader() {
   isLoader.value = false;
   document.body.classList.remove('loader-active');
@@ -461,7 +457,7 @@ definePageMeta({
     <FrequentQuestions @changeCurrentLimit="changeLimit" :newsList="generalStore.questionsAskedList"
                        :limit="questionsAskedLimit"/>
 
-    <section v-if="false" class="page-content__section page-content__reviews">
+    <section class="page-content__section page-content__reviews">
       <div class="page-content__heading">
         <div class="reviews-content__heading">
           <h2>Our <span>Testimonials</span></h2>
@@ -470,21 +466,15 @@ definePageMeta({
             service. See why our clients trust us for a secure and prosperous financial journey
           </p>
         </div>
-
-        <SwitchTabsPlan :currentPlan="productPlan"/>
+        <SwitchTabsPlan :currentPlan="productPlan" @changePlan="changeCurrentPlanProducts"/>
       </div>
 
-
-      <div class="reviews-content">
-        <ReviewsSlider :slidesData="generalStore?.reviewsList"/>
-      </div>
+      <ReviewsSlider v-if="productPlan === 'Individuals'" :slidesData="generalStore?.reviewsList"/>
 
     </section>
-
     <AppealRegistration/>
   </main>
 
-  <MainFooter/>
 </template>
 
 <style scoped lang="scss">
@@ -1283,6 +1273,10 @@ definePageMeta({
           flex-direction: row;
           overflow: scroll;
 
+          &::-webkit-scrollbar {
+            height: .139rem;
+          }
+
           .btn-nav {
             padding: .78rem 1.11rem;
             text-wrap: nowrap;
@@ -1312,6 +1306,13 @@ definePageMeta({
           }
 
         }
+      }
+    }
+
+    &__reviews {
+      .page-content__heading {
+        flex-direction: column;
+        gap: 2.22rem;
       }
     }
   }

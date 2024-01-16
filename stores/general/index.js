@@ -25,7 +25,7 @@ export const useGeneralStore = defineStore('general', () => {
     const getReviewsList = async () => {
         const res = await fetchReviewsList();
         res?.comments.forEach(review => {
-            if (reviewsList.length < 3) reviewsList.push(review);
+            reviewsList.push(review);
         })
     }
 

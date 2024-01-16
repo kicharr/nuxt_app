@@ -13,9 +13,6 @@ export default defineNuxtConfig({
     imports: {
         dirs: ['./stores'],
     },
-    modules: [
-        '@pinia/nuxt',
-    ],
     vite: {
         css: {
             preprocessorOptions: {
@@ -28,4 +25,12 @@ export default defineNuxtConfig({
             }
         }
     },
+    modules: [
+        '@pinia/nuxt',
+        'nuxt-swiper'
+    ],
+    swiper: {
+        prefix: 'Swiper',
+        styleLang: 'scss',
+    }
 })

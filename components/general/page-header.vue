@@ -1,5 +1,12 @@
 <script setup>
+import {checkUserAuth} from "~/utils/utils.js";
+import {useUserStore} from "~/stores/user/index.js";
 
+const userStore = useUserStore();
+
+const logout = () => {
+  userStore.logout();
+}
 </script>
 
 <template>
@@ -12,33 +19,43 @@
         </NuxtLink>
       </div>
 
-      <nav class="header__nav header__nav-desktop">
-        <ul class="header__nav-list">
-          <li>
-            <NuxtLink to="/" class="header__link" :class="{'header__link-active': $route.path === '/'}">Home</NuxtLink>
-          </li>
-          <li>
-            <NuxtLink to="/careers" class="header__link" :class="{'header__link-active': $route.path === '/careers'}">Careers</NuxtLink>
-          </li>
-          <li>
-            <NuxtLink to="/" class="header__link" :class="{'header__link-active': $route.path === '/about'}">About</NuxtLink>
-          </li>
-          <li>
-            <NuxtLink to="/" class="header__link" :class="{'header__link-active': $route.path === '/security'}">Security</NuxtLink>
-          </li>
-        </ul>
-      </nav>
-
       <div class="header__nav header__nav-mobile">
         <button class="btn btn__main header__nav-burger">
           <img src="@/assets/images/icons/burger.svg" alt="">
         </button>
       </div>
 
-      <div class="header__action">
-        <NuxtLink to="/authorization" class="btn btn__link header__btn" type="button">Sign Up</NuxtLink>
-        <NuxtLink to="/authorization" class="btn btn__main header__btn" type="button">Login</NuxtLink>
+      <nav class="header__nav header__nav-desktop">
+        <ul class="header__nav-list">
+          <li>
+            <NuxtLink to="/" class="header__link" :class="{'header__link-active': $route.path === '/'}">Home</NuxtLink>
+          </li>
+          <li>
+            <NuxtLink to="/careers" class="header__link" :class="{'header__link-active': $route.path === '/careers'}">
+              Careers
+            </NuxtLink>
+          </li>
+          <li>
+            <NuxtLink to="/" class="header__link" :class="{'header__link-active': $route.path === '/about'}">About
+            </NuxtLink>
+          </li>
+          <li>
+            <NuxtLink to="/" class="header__link" :class="{'header__link-active': $route.path === '/security'}">
+              Security
+            </NuxtLink>
+          </li>
+        </ul>
+      </nav>
+
+      <div v-if="!checkUserAuth()" class="header__action">
+        <NuxtLink to="/registration" class="btn btn__link header__btn">Sign Up</NuxtLink>
+        <NuxtLink to="/authorization" class="btn btn__main header__btn">Login</NuxtLink>
       </div>
+
+      <div v-if="checkUserAuth()" class="header__action">
+        <button @click="logout" class="btn btn__main header__btn">Log Out</button>
+      </div>
+
     </div>
   </header>
 </template>

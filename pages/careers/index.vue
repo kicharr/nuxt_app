@@ -34,7 +34,6 @@ definePageMeta({
 </script>
 
 <template>
-
   <main class="page-content container">
     <section class="page-content__section hero-block">
       <div class="hero-content">
@@ -160,7 +159,6 @@ definePageMeta({
 
     <AppealRegistration/>
   </main>
-
 </template>
 
 <style scoped lang="scss">
@@ -185,14 +183,21 @@ definePageMeta({
 
     span {
       display: inline-block;
-      color: $grey30;
+      color: $grey20;
       font-size: 3.2rem;
       font-weight: 500;
       margin-bottom: 1.67rem;
+      transition: color .5s linear;
     }
 
     p {
       color: $grey70;
+    }
+
+    &:hover {
+      span {
+        color: $white;
+      }
     }
   }
 }

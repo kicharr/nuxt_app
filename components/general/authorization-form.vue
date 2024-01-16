@@ -1,10 +1,21 @@
 <script setup>
 import {useUserStore} from "~/stores/user/index.js";
+import ReviewsSlider from "~/components/pages-blocks/sliders/reviews-slider.vue";
+import {useGeneralStore} from "~/stores/general/index.js";
 
+const generalStore = useGeneralStore();
 const userStore = useUserStore();
+
+let productPlan = ref('Individuals');
+const changeCurrentPlanProducts = (val) => productPlan.value = val;
 
 const login = ref('');
 const password = ref('');
+
+onBeforeMount(() => {
+  generalStore.getQuestionsAsked(4);
+  generalStore.getReviewsList();
+})
 
 const authorization = () => {
   if (!login.value || !password.value) {
@@ -56,6 +67,21 @@ const authorization = () => {
         </div>
       </div>
     </form>
+    <section class="page-content__section page-content__reviews">
+      <div class="page-content__heading">
+        <div class="reviews-content__heading">
+          <h2>Our <span>Testimonials</span></h2>
+          <p class="page-content__description reviews-content__title__description">
+            Discover how YourBank has transformed lives with innovative digital solutions and personalized customer
+            service. See why our clients trust us for a secure and prosperous financial journey
+          </p>
+        </div>
+        <SwitchTabsPlan :currentPlan="productPlan" @changePlan="changeCurrentPlanProducts"/>
+      </div>
+
+      <ReviewsSlider v-if="productPlan === 'Individuals'" :slidesData="generalStore?.reviewsList"/>
+
+    </section>
   </div>
 </template>
 
@@ -177,6 +203,17 @@ const authorization = () => {
 
 .continue__link {
   cursor: pointer;
+}
+
+.page-content {
+  &__reviews {
+    .page-content__heading {
+      display: flex;
+      align-items: flex-end;
+      gap: 16rem;
+      margin-bottom: 5.56rem;
+    }
+  }
 }
 
 
@@ -312,6 +349,13 @@ const authorization = () => {
 
   .continue__link {
     max-width: 2.8rem;
+  }
+
+  .page-content__reviews {
+    .page-content__heading {
+      flex-direction: column;
+      gap: 2.22rem;
+    }
   }
 }
 

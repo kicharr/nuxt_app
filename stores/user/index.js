@@ -1,14 +1,17 @@
 import {fetchReviewsList} from "~/stores/user/serverInterationMethods.js";
 
 export const useUserStore = defineStore('user', () => {
-    const token = ref('');
+    let token = ref('');
     const setToken = (token) => {
-        localStorage.setItem('token', token.value)
+        if (token !== undefined) {
+            localStorage.setItem('token', token);
+        }
     }
     const authorization = async ({login, password}) => {
         const res = await fetchReviewsList({login, password});
 
         if (res?.token) {
+            token.value = res?.token;
             setToken(res?.token);
             navigateTo('/');
         }

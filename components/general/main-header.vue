@@ -1,11 +1,8 @@
 <script setup>
 import {useUserStore} from "~/stores/user/index.js";
+import {checkUserAuth} from "~/utils/utils.js"
 
 const userStore = useUserStore();
-
-const checkUserAuth = () => {
-  return localStorage.getItem('token');
-}
 const logout = () => {
   userStore.logout();
 }
@@ -50,11 +47,11 @@ const logout = () => {
         </button>
       </div>
 
-      <div v-if="checkUserAuth" class="header__action">
+      <div v-if="checkUserAuth()" class="header__action">
         <button @click="logout" class="btn btn__main header__btn">Log Out</button>
       </div>
 
-      <div v-else class="header__action">
+      <div v-if="!checkUserAuth()" class="header__action">
         <NuxtLink to="/registration" class="btn btn__link header__btn">Sign Up</NuxtLink>
         <NuxtLink to="/authorization" class="btn btn__main header__btn">Login</NuxtLink>
       </div>
