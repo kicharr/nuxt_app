@@ -44,6 +44,16 @@ const logout = () => {
               Security
             </NuxtLink>
           </li>
+          <li>
+            <NuxtLink to="/recipes" class="header__link" active-class="header__link-active">
+              Recipes
+            </NuxtLink>
+          </li>
+          <li>
+            <NuxtLink to="/planner" class="header__link" active-class="header__link-active">
+              Planner
+            </NuxtLink>
+          </li>
         </ul>
       </nav>
 
