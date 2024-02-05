@@ -13,3 +13,17 @@ export const checkUserToken = () => {
     }
 }
 export const checkUserAuth = () => !!localStorage.getItem('token');
+
+export const closeModalClick = (e, selector) => {
+    const element = document.querySelector('selector');
+    // Проверка на клик вне области .selector
+    if (!e.composedPath().includes(element)) return true;
+}
+export const stringsLengthHandler = (str, limit) => {
+    if (str?.length >= limit) {
+        return str.slice(0, limit) + '...';
+    }
+    return str;
+}
+
+// Commit for test

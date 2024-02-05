@@ -2,14 +2,44 @@
 import {useUserStore} from "~/stores/user/index.js";
 import {checkUserAuth} from "~/utils/utils.js"
 
+const elementStyle = ref({
+  scale: 0.5,
+  opacity: .1,
+});
+
+const bottomLine = ref(0)
+const topLine = ref(0);
+
 const userStore = useUserStore();
 const logout = () => {
   userStore.logout();
 }
+
+onMounted(() => {
+  window.addEventListener('scroll', eventListener);
+})
+
+function eventListener() {
+  const scrollPosition = window.scrollY.toFixed(0);
+  const num = scrollPosition / 100;
+
+  const max = 1.30;
+  const min = 0.5;
+
+  if (Number(num) <= max) {
+    elementStyle.value.scale = num > min ? num : min;
+    elementStyle.value.opacity = num > min ? 1 : .1;
+  }
+
+  // element.style.top = scrollPosition / 5 + 'vh';
+}
+
+
 </script>
 
 <template>
   <header class="header">
+    <div id="element" :style="elementStyle" class="header__element"></div>
     <img src="@/assets/images/abstracts/abstract-header.svg" alt="" class="header__abstract-bg">
     <div class="header__content container">
       <div class="header__logo">
@@ -36,6 +66,16 @@ const logout = () => {
           <li>
             <NuxtLink to="/security" class="header__link" active-class="header__link-active">
               Security
+            </NuxtLink>
+          </li>
+          <li>
+            <NuxtLink to="/recipes" class="header__link" active-class="header__link-active">
+              Recipes
+            </NuxtLink>
+          </li>
+          <li>
+            <NuxtLink to="/planner" class="header__link" active-class="header__link-active">
+              Planner
             </NuxtLink>
           </li>
         </ul>
@@ -75,6 +115,24 @@ const logout = () => {
 
 .header {
   padding: 0 0.556rem;
+  position: relative;
+
+  &__element {
+    position: absolute;
+    top: 0;
+    left: calc(50% - 200px);
+    z-index: 200;
+
+    display: inline-block;
+    max-width: 400px;
+    width: 100%;
+    height: 400px;
+    background-color: rgba(0, 0, 0, .5);
+
+    transform: scale(0.5);
+
+    transition: all 1s ease-in-out;
+  }
 
   &__content {
     display: flex;
