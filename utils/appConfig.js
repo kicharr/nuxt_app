@@ -1,7 +1,7 @@
 // User authorization
 export const USER_AUTHORIZATION_URL = 'https://dummyjson.com/auth/login';
 // Frequently Asked Questions
-export const frequentlyAskedQuestions = (limit) => `https://dummyjson.com/posts?limit=${limit}`;
+export const frequentlyAskedQuestions = (limit) => `https://dummyjson.com/posts?limit=${limit ? limit : 20}`;
 // Frequently Asked Questions
 export const frequentlyAskedQuestionsSliced = (skipped, limit) => `https://dummyjson.com/posts?limit=${limit}&skip=${skipped}`;
 // Fetch reviews list

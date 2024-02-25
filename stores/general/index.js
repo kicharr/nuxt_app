@@ -30,7 +30,7 @@ export const useGeneralStore = defineStore('general', () => {
     }
 
     return {
-        questionsAskedList,
+        questionsAskedList: computed(() => questionsAskedList),
         questionsAskedListTotal,
         reviewsList,
         getReviewsList,

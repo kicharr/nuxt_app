@@ -1,12 +1,15 @@
 <script setup>
-import {useGeneralStore} from "~/stores/general/index.js";
-
-const generalStore = useGeneralStore();
+// import {useGeneralStore} from "~/stores/general/index.js";
+//
+// const generalStore = useGeneralStore();
 
 const props = defineProps(['newsList', 'limit']);
 const emit = defineEmits(['changeCurrentLimit']);
 
-const changeLimit = (val) => emit('changeCurrentLimit', val);
+
+
+// const changeLimit = (val) => emit('changeCurrentLimit', val);
+
 
 </script>
 
@@ -24,20 +27,20 @@ const changeLimit = (val) => emit('changeCurrentLimit', val);
       later.
     </h2>
 
-    <div v-else class="faq-list">
+    <div id="faqList" v-else class="faq-list">
       <div v-for="news in newsList" :key="news.id" class="faq-item">
         <h5 class="faq-item__title">{{ news?.title }}</h5>
         <hr class="faq-item__separator">
         <p class="faq-item__description">{{ news?.body }}</p>
       </div>
 
-      <button v-if="generalStore?.questionsAskedList?.length < generalStore?.questionsAskedListTotal"
-              @click="changeLimit(4)" class="faq-list__button">
-        Load All FAQ’s
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="23" viewBox="0 0 22 23" fill="none">
-          <path d="M16.5 8.75L11 14.25L5.5 8.75" stroke="white" stroke-width="2"/>
-        </svg>
-      </button>
+<!--      <button v-if="generalStore?.questionsAskedList?.length < generalStore?.questionsAskedListTotal"-->
+<!--              @click="changeLimit(4)" class="faq-list__button">-->
+<!--        Load All FAQ’s-->
+<!--        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="23" viewBox="0 0 22 23" fill="none">-->
+<!--          <path d="M16.5 8.75L11 14.25L5.5 8.75" stroke="white" stroke-width="2"/>-->
+<!--        </svg>-->
+<!--      </button>-->
     </div>
   </section>
 </template>
@@ -59,7 +62,7 @@ const changeLimit = (val) => emit('changeCurrentLimit', val);
 
 .faq-list {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.67rem;
 
   position: relative;
@@ -90,17 +93,17 @@ const changeLimit = (val) => emit('changeCurrentLimit', val);
     }
   }
 
-  &:before {
-    content: '';
-    width: 100%;
-    height: 15rem;
-
-    position: absolute;
-    bottom: 0;
-    left: 0;
-
-    background: linear-gradient(180deg, rgba(25, 25, 25, 0.00) 0%, #191919 100%);
-  }
+  //&:before {
+  //  content: '';
+  //  width: 100%;
+  //  height: 15rem;
+  //
+  //  position: absolute;
+  //  bottom: 0;
+  //  left: 0;
+  //
+  //  background: linear-gradient(180deg, rgba(25, 25, 25, 0.00) 0%, #191919 100%);
+  //}
 }
 
 .faq-item {

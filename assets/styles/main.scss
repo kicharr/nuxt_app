@@ -4,11 +4,12 @@
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: $grey11 $green60;
+  scrollbar-color:  $green60 $grey11;
 }
 
 *::-webkit-scrollbar {
   width: .278rem;
+  border-radius: .525rem;
 }
 
 *::-webkit-scrollbar-track {

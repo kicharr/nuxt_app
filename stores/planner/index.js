@@ -8,7 +8,6 @@ export const usePlannerStore = defineStore('planner', () => {
 
     const taskList = ref([]);
     const createNewTask = ({categoryId, name, text}) => {
-        console.log({categoryId, name, text})
         taskList.value.push({
             id: taskList.value?.length,
             categoryId: categoryId,
